@@ -1,0 +1,26 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(HeatService, "Сервис управления отоплением") {
+  Container(WebApp, "WebApp", "Java, Spring")
+  Container(DB_parameters, "БД parameters", "ClickHouse")
+  Container(DB_devices, "БД devices", "PostgreSQL")
+  
+}
+Container(WebApp, "Web Application", "Java, Spring") {
+  Component(DeviceController, "DeviceController")
+  Component(ParametersController, "ParametersController")
+  Component(ServiceLayer, "ServiceLayer")
+  Component(ParametersRep, "ParametersRep")
+  Component(DeviceRep, "DeviceRep")
+  
+}
+Rel(DeviceController, ServiceLayer, "Вызывает бизнес логику")
+Rel(ParametersController, ServiceLayer, "Вызывает бизнес логику")
+Rel(ServiceLayer, DeviceRep, "Записывает/вычитывает данные")
+Rel(ServiceLayer, ParametersRep, "Записывает/вычитывает данные")
+Rel(DeviceRep, DB_devices, "Записывает/вычитывает данные устройств")
+Rel(ParametersRep, DB_parameters, "Записывает/вычитывает параметры датчиков")
+
+@enduml
