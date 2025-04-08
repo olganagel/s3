@@ -1,0 +1,39 @@
+@startuml
+
+entity "user" as user {
+  id : INT
+  name : TEXT
+  city : TEXT
+}
+
+
+entity "device" as device {
+  id : TEXT
+  name : TEXT
+  house_id : INT
+}
+
+entity "house" as house {
+  id : INT
+  address : TEXT
+}
+
+entity "user_house" as user_house {
+  user_id : INT
+  house_id : INT
+}
+
+entity "parameter" as parameter {
+  id : INT
+  device : TEXT
+  datetime : TIMESTAMP
+  description : TEXT
+  
+}
+
+house ||--o{ device 
+user ||--o{ user_house
+house ||--o{ user_house 
+device ||--o{ parameter 
+
+@enduml

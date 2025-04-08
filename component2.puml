@@ -1,0 +1,32 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(CamService, "Сервис управления веб-камерами") {
+  Container(WebApp, "WebApp", "Java, Spring")
+  Container(DB_parameters, "DB parameters", "ClickHouse")
+  Container(DB_cameras, "DB cameras", "PostgreSQL")
+  Container(FileStorage, "FileStorage", "S3")
+}
+
+Container(WebApp, "Web Application", "Java, Spring") {
+  Component(CamController, "CamController")
+  Component(ParametersController, "ParametersController")
+  Component(VideoController, "VideoController")
+  Component(ServiceLayer, "ServiceLayer")
+  Component(CamRep, "CamRep")
+  Component(ParametersRep, "ParametersRep")
+  Component(VideoRep, "VideoRep")
+}
+
+Rel(CamController, ServiceLayer, "Вызывает бизнес логику")
+Rel(ParametersController, ServiceLayer, "Вызывает бизнес логику")
+Rel(VideoController, ServiceLayer, "Вызывает бизнес логику")
+Rel(ServiceLayer, ParametersRep, "Записывает/вычитывает данные")
+Rel(ServiceLayer, CamRep, "Записывает/вычитывает данные")
+Rel(ServiceLayer, VideoRep, "Записывает/вычитывает данные")
+Rel(ParametersRep, DB_parameters, "Записывает/вычитывает данные устройств")
+Rel(CamRep, DB_cameras, "Записывает/вычитает данные устройств")
+Rel(VideoRep, FileStorage, "Записывает/вычитывает данные устройств")
+
+@enduml

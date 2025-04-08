@@ -1,0 +1,15 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "Клиент")
+Person(admin, "Специалист")
+System(WarmHouseSystem, "Теплый дом")
+System_Ext(heatRelay, "Реле управления отоплением")
+System_Ext(tempDetector, "Датчик температуры")
+Rel(user, WarmHouseSystem, "Использует систему")
+Rel(admin, WarmHouseSystem,"Подключает систему")
+Rel(WarmHouseSystem, heatRelay,"Измененяет температуру")
+Rel(WarmHouseSystem, tempDetector,"Отправляет температуру")
+
+@enduml

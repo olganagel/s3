@@ -1,0 +1,47 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+class CamController {
+  +CamService camService
+  +ResponseEntity<CamDto> createCam(CamCreateDto dto)
+  +ResponseEntity<Void> updateCam(String camId, CamUpdateDto dto)
+  +ResponseEntity<CamStatusDto> getCamStatus(String camId)
+  +ResponseEntity<List<CamDto>> getUserCam(String userId)
+}
+
+class VideoController {
+  +VideoService videoService
+  +ResponseEntity<VideoAccessDto> requestVideoAccess(VideoRequest request)
+  +ResponseEntity<List<VideoRecordDto>> getVideoRecords(String camId, Instant from, Instant to)
+}
+
+class ParametersController {
+  +ParametersService parametersService
+  +ResponseEntity<CamParametersDto> getCurrentParameters(String camId)
+  +ResponseEntity<List<ParametersHistoryDto>> getParametersHistory(String camId, ParametersPeriod period)
+  +ResponseEntity<Void> uploadParameters(String camId, ParametersUploadDto parameters)
+}
+
+class CamService {
+  +CamRep camRep
+  +Cam createCam(CamCreate registration)
+  +Cam updateCam(String camId, camUpdate update)
+  +CamStatus getCamStatus(String camId)
+}
+
+
+class VideoService {
+  +VideoStorage videoStorage
+  +VideoRecord createVideoRecord(StreamSession session)
+  +VideoAccess grantAccess(VideoRequest request)
+}
+
+CamController --> CamService : uses
+VideoController --> VideoService : uses
+ParametersController --> ParametersService : uses
+CamService --> CamRep : depends
+VideoService --> VideoStorage : depends
+
+
+@enduml

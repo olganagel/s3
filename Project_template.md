@@ -1,97 +1,85 @@
-# Project_template
-
-Тип: Материал
-Родитель: Описание проекта для 11 когорты (https://www.notion.so/11-03abbbbc8bcb49ed9b85c9b6d1174056?pvs=21)
-
-Это шаблон для решения проектной работы. Структура этого файла повторяет структуру заданий. Заполняйте его по мере работы над решением.
-
 # Задание 1. Анализ и планирование
-
-<aside>
-💡
-
-Чтобы составить документ с описанием текущей архитектуры приложения, можно часть информации взять из описания компани и условия задания. Это нормально.
-
-</aside>
 
 ### 1. Описание функциональности монолитного приложения
 
 **Управление отоплением:**
 
-- Пользователи могут…
-- Система поддерживает…
-- …
+- Пользователи могут настраивать необходимую температуру в своих домах
+- Система поддерживает управление отоплением через мобильное приложение
 
 **Мониторинг температуры:**
 
-- Пользователи могут…
-- Система поддерживает…
-- …
+- Пользователи могут проверять температуру в своих домах
+- Система поддерживает отображение температуры в мобильном приложении
 
 ### 2. Анализ архитектуры монолитного приложения
 
-Перечислите здесь основные особенности текущего приложения: какой язык программирования используется, какая база данных, как организовано взаимодействие между компонентами и так далее.
+Приложение написано на языке Java, используется БД PostgreSQL, взаимодействие между компонентами прямое.
 
 ### 3. Определение доменов и границы контекстов
 
-Опишите здесь домены, которые вы выделили.
+- Управление отоплением
+- Мониторинг температуры
+- Управление устройствами
 
 ### **4. Проблемы монолитного решения**
 
-- …
-- …
-- …
-
-Если вы считаете, что текущее решение не вызывает проблем, аргументируйте свою позицию.
+- Разработка: трата времени на решение конфликтов в зависимых друг от друга функциональностях
+- Тестирование: трата времени на постоянные и полные регрессы всего приложения
+- Масштабируемость: невозможность горизонтального увеличения производительности, как следствие, возможные сбои в работе приложения, а затем утрата клиентов и прибыли
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-Добавьте сюда диаграмму контекста в модели C4.
+[Контекстная диаграмма](https://uml.planttext.com/plantuml/png/XPBBJi9G48RtFCMnAqo4Rbov8a4J5veGZN593ks9DEajxJJ23agY2uniN1WNtfw041eKXBx2d3ToJhaO4UAcpPdp_z_yCsqf11v0vDYvt8xb6dPa2bO7yCC3NG_uTV7AWdfKYq8H69uBmeMYuJcwRtDNcGeXcBPLqylxXOegNPoUw0uFGGHKgfQLem55FyDNH11wRbwXzfY6JpZ13qnmAcDjTtd9JSTorUqRffZ86rBqbKwsCzLvaz1E_f87ph57eFbPwT-9bE94Tl6JuH1d-BMILuyQaAyB3cV2vaqbVYNn11CcEvZA5dKOg2DEgK-FuKp6v4-N9NgkiUZj7meG1dZP90_Obx6y9UcOaPVqMVXMLkx8bkoIdvelHj-G_b6soJAZ_7SuebI9Z1cLih4LJtOMXCL-rX4Qlf1xY6CYt5EI_dR2d-u_cw4SEABmQcprNNfpogQ9jj9-xKR3PtAlLlmVC5SIhac_oZS0)
 
-Чтобы добавить ссылку в файл Readme.md, нужно использовать синтаксис Markdown. Это делают так:
-
-```markdown
-[Текст ссылки](URL)
-```
-
-Замените `Текст ссылки` текстом, который хотите использовать для ссылки. Вместо `URL` вставьте адрес, на который должна вести ссылка. Например:
-
-```markdown
-[Посетите Яндекс](https://ya.ru/)
-```
 
 # Задание 2. Проектирование микросервисной архитектуры
 
-В этом задании вам нужно предоставить только диаграммы в модели C4. Мы не просим вас отдельно описывать получившиеся микросервисы и то, как вы определили взаимодействия между компонентами To-Be системы. Если вы правильно подготовите диаграммы C4, они и так это покажут.
-
 **Диаграмма контейнеров (Containers)**
 
-Добавьте диаграмму.
+[Диаграмма контейнеров](https://uml.planttext.com/plantuml/png/dLPTQnDB6BxFhnXxrO8r5thbbJOLmx65QXGlopGPawNxnUx4MaJe1ofIqUD1K0u7Uuxu0s9jJXlJ9k0lcFb7Fk_iRhARtKWgWIKxyxxFytu-oOrGya2s7RjKkcIvTRlT4AmbfHzUBvS3ldMbQSbMUwCTYg3kkLAuyahTSyg-pLroMWnbmxOsofLhYsjqz61rfUpmK8e0H-iLp_4zbtnyGr1Q4q7ekVEyuLZkPJQd_bD3rTKlrAdggBuwrRjwRsuXiI9EClgRhbHNdPlBKWLXSCiLmVgIrtORFDYUVrWbky-m6Qg-Fb0zfexLG9tDBR2d9SP67lEhtiPDtoVZVzGXA_B0tHrFsXHURSjw9C6O1hX9aSSGVyBb396Tg--gGuxL-wihbzaV_367inzORdFIsxTkSocs-3QinoyHQSxwORKcWiTMNOHHmAVgkzvH0xsBakse8rEkWmcVfS3RZAhsZcmH6MmPN0RuVDMlg8m0wisP07Yz9TWT_cYJJy0iBwrJzGtnE_MUcHVoMVD2sGn4xUvAtiFd0NU4JBcDJyYtOblrpQe7h0dVclG2tXJazGM3q4E_1yXleBfCFqSQ7HCppGVY9wJQLI0ycp8AwQBb6_oZdnkAgk0oTefcSbHUflVLq0Hm17fJElsMeGLxW1ecHtYQkQ76JsHsNpZ-56YCpi000Wk7D4RVL8VX5N1cBS2hz_I-ta6NY-4htBbGu4Vu-dMHnXKKXe06U0huikS55q8_9dn4-_eNe2jMitMXOcDq2NKlMSuO4yslRKDcdFLRJ-Hy2nsy9sopLkfV-FPfT6RktK8QIvgMkQ5djkYzwS5BshrfhSbusvGVfHjujft8ru2aownZdtYZXOoowcJT6wZvZ8cCggtVP37gt5aMINt_odKSnc1893YjPuS8y1YcVVq66NSeljWuKkAnU7v4_4DA1xq-GNXZop5UHklYsmIXw2vzbbtYGnDu5x6Pc1XLOhGr9qOgI27Eeoq_mSimqac6qmuUYF3_-3ejdZ5nccmidv_0CAgwVck8SpBQnKhHIBrC8jIl2q3JOlg1eekKsuGDs3AoEQ0HmuoC3fd9DaeABADYHzcQIQHPw1NJPPNuzpWntRlnrFRecpegu4efz-miA3wOkW0-INoW5n5uqe3CHXVreg3FD0ndfZD9TwPkR9egk_27fjBxoG9GwJknK7Qf7FhWrwXfISviOXuu_Z4_8qs29eoND1TY1cZ6QWpZcIJ4rBnE9ybepumaIGEJt-ZkI9To7IrGnXb9y1YF8lu3xMVbirIw8Tm6_b_-1000)
+
 
 **Диаграмма компонентов (Components)**
 
-Добавьте диаграмму для каждого из выделенных микросервисов.
+[Сервис управления отоплением](https://uml.planttext.com/plantuml/png/fLHDJ-Cm4BtdLvYUYWJamcbFBEM0K94A5TfZvIPMYKXiot5OeTLAK0uSUbZjQgKzymzA8M8_QFiNnl-8SPgM9WtI2Ww9PfxytZoFnzw9DLKwYKB7MGku5oO-8wTQo_Y3wohwUQiNwDEacyHCUO9hnlMM9o9NXfHRqcQi_J3eketjpPQ5JWwRRaHZpHH2dOQ8fE2M8xC23LIW0MUgioiIxbDrKTzdLBUPEWyyja5gS0kfkOGH_3PNn5p359CXflyWXJ62tmXCJ1ycC9r3-7-ghPCl3Y4BzVedrlqe9UhDWXf61_ISRf2sL07lrTOBg_TsEv8g6Z5q7LiJt-4dUK4ikn46tjc-m2wiSdrcpI-8UMfPBH7hdcBjesR6ShuwrHO9HbY0wa3mLQ_vtl9ErlSoVIkaH1WoXUlBKEvnpcWjjb9WLS4bPdumJNgHCPRJLsiSCraGnxoqTcPtjcuHppjqpCAABPQCm0ypW4VyHZWTgUaJkCD9UCHvI75kS3GcS8_0NtEDibQnkWNlLItobxS5lr1YQgVuHSw5aHcO6mJxopKUC1Z36A6qKhRSsNT9BtaiJkwRHF668g6FTtG2Vsm4evL-psiLRzZ_bvl2C7i3dcngBiqWSu3XZJqAB6nBEZkC-_Z2F0C0)
+
+[Сервис управления веб-камерами](https://uml.planttext.com/plantuml/png/hLJ1RjD04BtdAvQSMgcf3t3YLE8A8HIaK0iuHXjxbQvOxrhhTL65a20zSEW1YGld_W4DM0s5jBym_YDcOoUnDq48qaFacT5xRsVURkOWDLIRB1QjrZqkGv55Z1mRawGFFK_JD_iZRewpOPOo7Iffc3JxeOgzH51fIPtKH88FFVz1fszBBvxrl9YcXcai3NmL9qfQJZ8_m4S5oYNJWwxAP4JrwOvFuu3f4nwoFTA62yYBzp21QV6156TmYybNJ7z23ZCiVYAOv73PWMki_vg3xNVQtYLlMuGizNTUiU6Z9479CcXZz9IUq3qI99hBKNktWJxi3XAgQSomxnIXXrsooYtN5pny_KIX2-lC476QLhGgiPo-Iir8i-1vp-4yve85HcawiZFNCiiAxYFwNSsgnYW48so56gxa-aoL1vNdrbghefKGJDiXwddLqmBRNuxRe6mgEyoNF6AgGN8g3hwwxHuzdOFhgOF4VezOKZQEmHyxBa6DV5EF9MmHbYuVCU7QvFG7dujpkCBV15zQNem9NC8Khl0vvlX6yMNUm3SiN1Tdg6ZbDZkvhUgQoziADlckcV05PMxjtt0bwS6aE2y-Od5SF-Sx1ZEOOIdVABsynJlKhDtdLghEsEuQ-3zjN5n86EDgke4VDe99TTp2YiRI-CiX_tJ0ofVcZhdBGLe7J4QupNy3)
+
 
 **Диаграмма кода (Code)**
 
-Добавьте одну диаграмму или несколько.
+[Диаграмма кода](https://uml.planttext.com/plantuml/png/ZLHDQzmm4BtxLwYtBEt6bvoMiAHi0mcai6pON8iYJHs1BRdIE26K_lVCs9OjEzwb9rblljwCtlWceFJOL6MMVJ5MbOq6yO9OXqsUU_bsMHXyQPwR05uvYs3nKhaghqjfEMWTK9VcETzThVSC7Ny-v9KC29wWNpjNrSvoJDqMKAKCGUnajQDKtfKbUF4t4-8hGO_WNuq2eOPFDXmWK8O0jnODlb-JtmzqMw4yI0IwNN2ozaAuqEXM2r5FpkYjQ6hTnpoYDxRWIlVw6zCvjgOp6PWVIcn2Mxq07819igNG1nCmycv3ZpJAX0LFbYF_nV4y6GrkFg0MZ2DwJIvBxRBvkr8GEheU_ZGGC84lskz3XqVxIVAzit9U3qqaM9ZDyzwIeYoAtzvLuutdEhIubrvMG289ypv7IsosdYFBppC63a_KU4_I6mt_zrIZ_nrTdNyVUlvacJK-slVWZTEYRezpYYoTr2S8flcEhIFhSvn6CivaU-8s7Q3cD7JqmDBAqCiNr8cNQ9nTHSTJUwBYdlGUCQ3RWtDBGKHJRK-uTWXDKnPHsDrbC7Ogw_ad21S1xZm4eYz2Tww6k4xgel0alxEo9thJNz9wlKrdkk4T3TbyBzbhqa_ljoXkTlwixJuYgTMNvkVR20qrMDrNJZqcGnlziko6JlhJVW00)
+
 
 # Задание 3. Разработка ER-диаграммы
 
-Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
+[ERD](https://uml.planttext.com/plantuml/png/TP712eCm38RlVOgmko-mapjuyE0OpCDkKcnW1QsZhS9Gttrjx6mTx9Q_IRxyINDZkRPZtp66oahxXjDeK9-06_01p0n02ZX3UQrTg7YFJjJ5mwlMDmIrieWGECaM2RA54HCwZvpdu6Or-vWraYX388f-xN0XD1gJEDB8hHnK8xYb0MLLtEjBTKkXVh4cagCaFCbandzpBwxT6ZQSQrT42NllngpiZtu0S7AWMD4vtINNt1mjIvODynV7w4_2M_Hzh4tsOQ4lPA95nd9Kml_x1m00)
 
-Четвёртое задание — дополнительное. Его можно сделать по желанию. Чтобы ревьюер быстрее проверил ваше решение, укажите, сделали вы это задание или нет. Для этого оставьте нужный эмодзи около заголовка задания:
 
-✅ — вы выполнили задание.
+## Сущности и их атрибуты
+- Пользователь user
+  - идентификатор id
+  - имя name
+  - город city
 
-❌ — вы пропустили задание.
+- Устройство device
+    - идентификатор id
+    - наименование name
+    - связанный дом house_id
 
-# ✅ ❌ Задание 4. Создание и документирование API
+- Дома house
+    - идентификатор id
+    - адрес address
 
-### 1. Тип API
+- Связь user_house (Каждый пользователь может иметь несколько домов и каждый дом может принадлежать нескольким пользователям, всякую связь многие ко многим нужно разделять промежуточной таблицей)
+    - идентификатор пользователя user_id
+    - идентификатор дома house_id
 
-Укажите, какой тип API вы будете использовать для взаимодействия микросервисов. Объясните своё решение.
+- Параметры устройств parameter
+    - идентификатор id
+    - связанное устройство device
+    - дата и время datetime
+    - описание description
 
-### 2. Документация API
-
-Здесь приложите ссылки на документацию API для микросервисов, которые вы спроектировали в первой части проектной работы. Для документирования используйте Swagger/OpenAPI или AsyncAPI.
+# ❌ Задание 4. Создание и документирование API

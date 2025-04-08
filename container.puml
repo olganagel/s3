@@ -1,0 +1,49 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Person(admin, "Специалист")
+Person(user, "Клиент")
+
+Container_Boundary(WH, "Теплый дом") {
+  Container(MobApp, "МП Теплый дом", "Kotlin, Swift")
+  Container(AdminApp, "Админка", "HTML, Java, Spring")
+  Container(ApiGateway, "ApiGateway", "Kong")
+  Container(WHServices, "Микросервисы")
+  Container(Broker, "Брокер сообщений", "Apache Kafka")
+  Container(DB_users, "БД users", "PostgreSQL")
+  Container(DB_parameters, "БД parameters", "ClickHouse")
+  Container(Storage, "Файловое хранилище", "S3")
+}
+
+Container_Boundary(WHServices, "Теплый дом»") {
+  Container(HeatService, "Сервис управления отоплением", "Java")
+  Container(TempService, "Сервис мониторинга температуры", "Java")
+  Container(CamService, "Сервис управления веб-камерами", "Java")
+  Container(DoorService, "Сервис управления дверьми", "Java")
+  Container(LightService, "Сервис управления светом", "Java")
+}
+
+System_Ext(heatRelay, "Реле управления отоплением")
+System_Ext(tempSensor, "Датчик температуры")
+System_Ext(lightController, "Контроллер света")
+System_Ext(doorRelay, "Реле управления дверью")
+System_Ext(camDevice, "Веб-камера")
+Rel(admin, AdminApp, "Подключает")
+Rel(user, MobApp, "Использует")
+Rel(AdminApp, ApiGateway, "")
+Rel(MobApp, ApiGateway, "")
+Rel(ApiGateway, WHServices, "Передает авторизованный запрос на нужный сервис")
+Rel(WHServices, Broker, "Отправляет сообщение в очередь")
+Rel(WHServices, DB_users, "Записывает/вычитывает данные пользователей")
+Rel(WHServices, DB_parameters, "Записывает/вычитывает данные устройств")
+Rel(WHServices, Storage, "Записывает/вычитывает видеозаписи")
+Rel(Broker, heatRelay, "Отправляет запрос на изменение температуры")
+Rel(Broker, tempSensor, "Получает параметры температуры")
+Rel(CamService, camDevice, "Получает просмотр камеры")
+Rel(Broker, camDevice, "Отправляет запрос на перемещение камеры")
+Rel(Broker, doorRelay, "Отправляет запрос на запирание двери")
+Rel(Broker, lightController, "Отправляет запрос на настройку света")
+
+
+@enduml
